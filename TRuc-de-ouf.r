@@ -95,7 +95,7 @@ data_euro_dollar$Date <- substr(data_euro_dollar$Date, 1,7)
 
 Data <- left_join(Data, data_euro_dollar, by = c("Date"="Date"))
 
-### MCOIL eu
+### MCOIL eu prix du petrol sur le marché EUROPEAN
 
 mcoilbrenteu <- read.csv("MCOILBRENTEU.csv")
 mcoilbrenteu$Date <- as.Date(mcoilbrenteu$DATE, format = "%Y-%m-%d")
@@ -110,6 +110,14 @@ Data <- left_join(Data, mcoilbrenteu[-c(1)], by = c("Date"="Date"))
 natgasprice <- read.csv("natural_gas_prices.csv")
 colnames(natgasprice) <- c("Date", "Natural gas price")
 Data <- left_join(Data, natgasprice, by = c("Date"="Date"))
+
+######### . 
+#########   Loans for consumption excluding revolving loans and overdrafts, Over 1 and up to 5 years
+data3 <- read.csv("data_credit.csv")
+data3$Date <- paste(data3$Date, "01")
+data3$Date <- as.Date(data3$Date, format = "%Y%b%d")
+data3$Date <- substr(data3$Date, 1,7)
+
 
 
 ########    n'executes  pas
